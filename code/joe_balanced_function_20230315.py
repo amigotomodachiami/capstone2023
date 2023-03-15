@@ -2,24 +2,26 @@
 # You cannont add anything to the string.
 # Balanced parentheses means that each opening parenthesis has a corresponding closing parenthesis and the pairs of parentheses are properly nested.
 
+
 def balance(string):
     remove_pos = set()  # container
-    stack_pos = []  # stack
+    open_pos = []  # stack
     for index, char in enumerate(string):
         if char not in "()":
             continue
         if char == "(":
-            stack_pos.append(index)
-        elif stack_pos == []:  # if ) and there is not open para
+            open_pos.append(index)
+        elif open_pos == []:  # if ) and there is not open para
             remove_pos.add(index)
         else:  # there is opening, pop
-            stack_pos.pop()
-    remove_pos = remove_pos.union(set(stack_pos))  # union un-pop(left-over) open para
+            open_pos.pop()
+    remove_pos = remove_pos.union(set(open_pos))  # union un-pop(left-over) open para
     output = ""
     for index, char in enumerate(string):
         if index not in remove_pos:
             output += char
     return output
+
 
 string = "(we)(ff(we)"
 string1 = "()"
